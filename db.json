@@ -1,0 +1,18 @@
+{
+  "user": [
+    {
+      "name": "adnan",
+      "address": "Dhaka",
+      "email": "adnan@gmail.com",
+      "contact": "01533137582",
+      "id": 1
+    },
+    {
+      "name": "abir",
+      "address": "Meherpur",
+      "email": "abir@gmail.com",
+      "contact": "01533137583",
+      "id": 2
+    }
+  ]
+}
