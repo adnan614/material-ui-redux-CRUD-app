@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router";
-import { useDispatch } from "react-redux";
-import { addUser } from "../redux/action";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser, getSingleUser } from "../redux/action";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,8 +17,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddUser = () => {
+const EditUser = () => {
   const classes = useStyles();
+  const { id } = useParams();
   const [state, setState] = useState({
     name: "",
     address: "",
@@ -29,6 +31,8 @@ const AddUser = () => {
 
   const dispatch = useDispatch();
 
+  let { user } = useSelector((state) => state.data);
+
   const { name, email, address, contact } = state;
 
   let history = useHistory();
@@ -37,6 +41,16 @@ const AddUser = () => {
     let { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
+
+  useEffect(() => {
+    dispatch(getSingleUser(id));
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      setState({ ...user });
+    }
+  }, [user]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,7 +74,7 @@ const AddUser = () => {
       >
         Go Back
       </Button>
-      <h2>Add User</h2>
+      <h2>Edit User</h2>
       {error && <h3 style={{ color: "red" }}>{error}</h3>}
       <form
         className={classes.root}
@@ -117,4 +131,4 @@ const AddUser = () => {
   );
 };
 
-export default AddUser;
+export default EditUser;

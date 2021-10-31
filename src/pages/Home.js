@@ -116,7 +116,12 @@ const Home = () => {
                     >
                       Delete
                     </Button>
-                    <Button color="primary">Edit</Button>
+                    <Button
+                      color="primary"
+                      onClick={() => history.push(`/edit-user/${user.id}`)}
+                    >
+                      Edit
+                    </Button>
                   </ButtonGroup>
                 </StyledTableCell>
               </StyledTableRow>
